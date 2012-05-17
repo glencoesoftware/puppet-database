@@ -48,5 +48,6 @@ class database::postgres (
     hasrestart => 'true',
     hasstatus  => 'true',
     restart    => "/sbin/service ${pg_service_name} reload",
+    require    => Exec['initdb'],
   }
 }
