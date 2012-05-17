@@ -1,4 +1,4 @@
-class postgres (
+class database::postgres (
   $version = hiera('postgres_version', '9.1'),
   $release_pkg_name = hiera('postgres_release_package', 'pgdg-centos91'),
   $version = hiera('postgres_version'),
