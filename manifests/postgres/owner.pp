@@ -3,7 +3,7 @@ define database::postgres::owner (
   $owner   = $name,
   $password,
   $pg_user = hiera('postgres_user', 'postgres'),
-  $version = hiera('postgres_version' '9.1'),
+  $version = hiera('postgres_version', '9.1'),
 ) {
 
   $pg_dir = "/usr/pgsql-${version}"
