@@ -1,8 +1,7 @@
 class database::postgres (
   $version = hiera('postgres_version', '9.1'),
   $release_pkg_name = hiera('postgres_release_package', 'pgdg-centos91'),
-  $version = hiera('postgres_version'),
-  $pg_user = hiera('postgres_user'),
+  $pg_user = hiera('postgres_user', 'postgres'),
   $service_name = hiera('postgres_custom_service_name', ''),
 ) {
   

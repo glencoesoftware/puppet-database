@@ -3,9 +3,9 @@ define database::postgres::db (
   $owner_pass,
   $dbname = $name,
   $ensure = 'present',
-  $pg_user,
   $template_db = 'template1',
-  $version
+  $pg_user = hiera('postgres_user', 'postgres'),
+  $version = hiera('postgres_version', '9.1'),
 ) {
 
   $pg_dir = "/usr/pgsql-${version}"
