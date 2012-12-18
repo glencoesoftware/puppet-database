@@ -14,6 +14,6 @@
 #
 # Sample Usage:
 #
-class database::postgres::replication {
+class database::postgres::replication inherits database::postgres {
   notice "doing stuff with replication"
 }

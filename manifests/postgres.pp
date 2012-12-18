@@ -34,10 +34,41 @@ class database::postgres (
   }
 
   file {
-    "/var/lib/pgsql/${version}/data/pg_hba.conf":
+    "pg_hba.conf":
+      path    => "/var/lib/pgsql/${version}/data/pg_hba.conf", 
       content => template("${module_name}/pg_hba.conf.erb"),
       require => Exec['initdb'],
       notify  => Service['postgres'],
+      ;
+    "postgresql.conf":
+      path    => "/var/lib/pgsql/${version}/data/postgresql.conf",
+      # content => template("${module_name}/postgresql.conf.erb"),
+      source  => [ 
+        "puppet:///modules/${module_name}/postgres/postgresql.conf.${fqdn}",
+        "puppet:///modules/${module_name}/postgres/postgresql.conf",
+      ],
+      require => Exec['initdb'],
+      notify  => Service['postgres'],
+      ;
+    "etc-postgres":
+      path   => '/etc/postgres',
+      ensure => 'directory',
+      owner  => $pg_user,
+      group  => $pg_group,
+      ;
+    'etc-postgresql.conf':
+      ensure => 'link',
+      path   => '/etc/postgres/postgresql.conf',
+      target => "/var/lib/pgsql/${version}/data/postgresql.conf",
+      owner  => $pg_user,
+      group  => $pg_group,
+      ;
+    'etc-pg_hba.conf':
+      ensure => 'link',
+      path   => '/etc/postgres/pg_hba.conf',
+      target => "/var/lib/pgsql/${version}/data/pg_hba.conf",
+      owner  => $pg_user,
+      group  => $pg_group,
       ;
   }
 
