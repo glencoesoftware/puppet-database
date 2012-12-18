@@ -14,6 +14,6 @@
 #
 # Sample Usage:
 #
-class manifests::postgres::replication::master {
+class database::postgres::replication::master {
   notice "master class replication"
 }
