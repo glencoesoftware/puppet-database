@@ -3,7 +3,7 @@ class database::postgres (
   $release_pkg_name = hiera('postgres_release_package', 'pgdg-centos91'),
   $pg_user = hiera('postgres_user', 'postgres'),
   $service_name = hiera('postgres_custom_service_name', ''),
-  $pg_listen_addresses = hiera('postgres_listen_address', 'localhost'),
+  $pg_listen_addresses = hiera('postgres_listen_addresses', 'localhost'),
   $pg_max_connections = hiera('postgres_max_connections', '100'),
   $pg_wal_level = hiera('postgres_wal_level', 'minimal'),
   $pg_max_wal_senders = hiera('postgres_max_wal_senders', '0'),
