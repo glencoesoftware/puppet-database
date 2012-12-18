@@ -14,7 +14,7 @@ class database::postgres (
   $pg_replication_slave = hiera('postgres_replication_slave', ''),
   $pg_replication_master = hiera('postgres_replication_master', ''),
 ) {
-  
+
   # install classes
   class { 'database::postgres::packages': }
 
@@ -26,7 +26,7 @@ class database::postgres (
   $vardir = "/var/lib/pgsql/${version}"
   $bindir = "/usr/pgsql-${version}/bin"
 
-  File { 
+  File {
     owner   => $pg_user,
     group   => $pg_user,
     require => Class['database::postgres::packages'],
@@ -45,7 +45,7 @@ class database::postgres (
 
   file {
     "pg_hba.conf":
-      path    => "/var/lib/pgsql/${version}/data/pg_hba.conf", 
+      path    => "/var/lib/pgsql/${version}/data/pg_hba.conf",
       content => template("${module_name}/pg_hba.conf.erb"),
       require => Exec['initdb'],
       notify  => Service['postgres'],
