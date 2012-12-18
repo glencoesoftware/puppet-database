@@ -49,26 +49,21 @@ class database::postgres (
       ],
       require => Exec['initdb'],
       notify  => Service['postgres'],
+      mode    => '0600',
       ;
     "etc-postgres":
       path   => '/etc/postgres',
       ensure => 'directory',
-      owner  => $pg_user,
-      group  => $pg_group,
       ;
     'etc-postgresql.conf':
       ensure => 'link',
       path   => '/etc/postgres/postgresql.conf',
       target => "/var/lib/pgsql/${version}/data/postgresql.conf",
-      owner  => $pg_user,
-      group  => $pg_group,
       ;
     'etc-pg_hba.conf':
       ensure => 'link',
       path   => '/etc/postgres/pg_hba.conf',
       target => "/var/lib/pgsql/${version}/data/pg_hba.conf",
-      owner  => $pg_user,
-      group  => $pg_group,
       ;
   }
 
