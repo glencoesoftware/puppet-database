@@ -14,9 +14,12 @@
 #
 # Sample Usage:
 #
-class database::postgres::replication::master {
+class database::postgres::replication::master inherits database::postgres {
   file { 'recovery.conf':
     ensure => 'absent',
     path   => "/var/lib/pgsql/${version}/data/recovery.conf",
   }
+
+  # must be defined
+  $pg_replication_slave = hiera('postgres_replication_slave')
 }
