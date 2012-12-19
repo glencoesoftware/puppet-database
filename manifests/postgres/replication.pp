@@ -36,4 +36,19 @@ class database::postgres::replication inherits database::postgres {
     type   => 'ssh-rsa',
     key    => $pg_ssh_pubkey,
   }
+
+  $pg_replication_slave = hiera('postgres_replication_slave', '')
+  $pg_replication_master = hiera('postgres_replication_master', '')
+
+  if $pg_replication_slave {
+    host { 'pg_standby':
+      ip => $pg_replication_slave,
+    }
+  }
+
+  if $pg_replication_master {
+    host { 'pg_master':
+      ip => $pg_replication_master,
+    }
+  }
 }
