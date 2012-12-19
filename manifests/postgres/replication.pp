@@ -30,8 +30,9 @@ class database::postgres::replication inherits database::postgres {
   }
 
   ssh_authorized_key { 'ssh_key_postgres':
-    user => $pg_user,
-    type => 'ssh-rsa',
-    key  => hiera('postgres_ssh_pubkey'),
+    ensure => 'present',
+    user   => $pg_user,
+    type   => 'ssh-rsa',
+    key    => hiera('postgres_ssh_pubkey'),
   }
 }
