@@ -38,7 +38,7 @@ class database::postgres::replication inherits database::postgres {
   }
 
   $pg_replication_slave = hiera('postgres_replication_slave', '')
-  $pg_replication_master = hiera('postgres_replication_master', '')
+  $pg_replication_master = hiera_hash('postgres_replication_master', {})
 
   if $pg_replication_slave {
     host { 'pg_standby':
@@ -46,9 +46,9 @@ class database::postgres::replication inherits database::postgres {
     }
   }
 
-  if $pg_replication_master {
+  if $pg_replication_master['host'] {
     host { 'pg_master':
-      ip => $pg_replication_master,
+      ip => $pg_replication_master['host'],
     }
   }
 }
