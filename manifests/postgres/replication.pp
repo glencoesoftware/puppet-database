@@ -27,11 +27,6 @@ class database::postgres::replication inherits database::postgres {
       mode   => '0600',
       source => "puppet:///modules/${module_name}/postgres-ssh-privatekey.key",
       ;
-    'ssh_public_key':
-      path    => "${vardir}/.ssh/id_rsa.pub",
-      mode    => '0644',
-      content => hiera('postgres_ssh_pubkey'),
-      ;
   }
 
   ssh_authorized_key { 'ssh_key_postgres':
