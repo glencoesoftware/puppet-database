@@ -74,7 +74,6 @@ class database::postgres (
 
   service { 'postgres':
     name       => $pg_service_name,
-    ensure     => 'running',
     enable     => 'true',
     hasrestart => 'true',
     hasstatus  => 'true',
