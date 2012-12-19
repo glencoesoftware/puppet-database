@@ -15,9 +15,10 @@
 # Sample Usage:
 #
 class database::postgres::replication::slave inherits database::postgres {
+  $pg_restore_command = hiera('postgres_restore_command', '')
+
   # these should not have defaults so that they fail when not specified
   $pg_replication_master = hiera_hash('postgres_replication_master')
-  $pg_restore_command = hiera('postgres_restore_command')
 
   file {
     'recovery.conf':
