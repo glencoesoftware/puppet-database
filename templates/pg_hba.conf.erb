@@ -89,5 +89,5 @@ host    all             all             ::1/128                 md5
 #host    replication     postgres        127.0.0.1/32            ident
 #host    replication     postgres        ::1/128                 ident
 <% if @pg_replication_slave -%>
-host    replication     postgres        <%= @pg_repliation_slave %>    trust
+host    replication     postgres        <%= @pg_replication_slave %>    trust
 <% end -%>
