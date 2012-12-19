@@ -11,6 +11,7 @@ class database::postgres (
   $pg_archive_mode = hiera('postgres_archive_mode', 'off'),
   $pg_archive_command = hiera('postgres_archive_command', ''),
   $pg_hot_standby = hiera('postgres_hot_standby', 'off'),
+  $pg_connections = hiera_array('postgres_connections', []),
 ) {
 
   # install classes
