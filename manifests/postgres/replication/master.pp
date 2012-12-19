@@ -22,4 +22,5 @@ class database::postgres::replication::master inherits database::postgres {
 
   # must be defined
   $pg_replication_slave = hiera('postgres_replication_slave')
+  notice $pg_replication_slave
 }
