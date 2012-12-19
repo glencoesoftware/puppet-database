@@ -24,6 +24,7 @@ class database::postgres::replication::slave inherits database::postgres {
     'recovery.conf':
       path    => "/var/lib/pgsql/${version}/data/recovery.conf",
       content => template("${module_name}/recovery.conf.erb"),
+      require => Exec['initdb'],
       ;
   }
 }
