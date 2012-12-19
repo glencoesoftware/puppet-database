@@ -29,6 +29,7 @@ class database::postgres::replication inherits database::postgres {
       ;
   }
 
+  notice "pguser: ${pg_user}"
   ssh_authorized_key { 'ssh_key_postgres':
     ensure => 'present',
     user   => $pg_user,
