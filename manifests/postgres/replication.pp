@@ -29,7 +29,7 @@ class database::postgres::replication inherits database::postgres {
       ;
   }
 
-  $pg_ssh_pubkey = hiera('postgres_ssh_pubkey'),
+  $pg_ssh_pubkey = hiera('postgres_ssh_pubkey')
   notice "pguser: ${pg_user}"
   notice "key: ${pg_ssh_pubkey}"
 
