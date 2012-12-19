@@ -80,4 +80,5 @@ class database::postgres (
     restart    => "/sbin/service ${pg_service_name} reload",
     require    => Exec['initdb'],
   }
+
 }
