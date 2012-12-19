@@ -18,6 +18,10 @@ class database::postgres::replication inherits database::postgres {
   # generic replication settings go here
   # replication dbs need to have keys
   file {
+    "${vardir}/.ssh":
+      ensure => 'directory',
+      mode   => '0700',
+      ;
     'ssh_private_key':
       path   => "${vardir}/.ssh/id_rsa",
       mode   => '0600',
