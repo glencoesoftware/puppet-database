@@ -90,6 +90,6 @@ host    all             all             ::1/128                 md5
 #host    replication     postgres        ::1/128                 ident
 <%- unless @pg_connections.nil? -%>
   <%- @pg_connections.each do |pg_connection| -%>
-    <%=- pg_connection['type'] %>     <%= pg_connection['database'] %>     <%= pg_connection['user'] %>    <%= pg_connection['address'] %>    <%= pg_connection['method'] %>
-  <% end -%>
-<% end -%>
+<%= pg_connection['type'] %>     <%= pg_connection['database'] %>     <%= pg_connection['user'] %>        <%= pg_connection['address'] %>       <%= pg_connection['method'] %>
+  <%- end -%>
+<%- end -%>
