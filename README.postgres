@@ -1,0 +1,40 @@
+PostgresQL
+
+Need to manually install (or make available) the pgdg91-release rpm
+
+Replication
+  - postgres::replication class provides keys and other shared things
+** things puppet can't do **
+  - need to remove the data directory on the standby
+  - set primary in backup mode
+    - psql -c "SELECT pg_start_backup('replication-seed', true)"
+  - rsync data/ dir from master to standby
+  - restart slave
+  - put master out of backup mode
+    - psql -c "SELECT pg_stop_backup()"
+** end **
+  - postgres::replication::master
+    postgres_listen_addresses: '*'
+    postgres_wal_level: hot_standby
+    postgres_wal_keep_segments: 32
+    postgres_max_wal_senders: 5
+    postgres_replication_slave: slaveip
+    sysctl_settings:
+      kernel.shmmax: 104857600
+    postgres_connections:
+      -
+        type: host
+        database: replication
+        user: postgres
+        address: cidr address for host or network
+        method: trust
+  - postgres::replication::slave
+    postgres_listen_addresses: '*'
+    postgres_hot_standby: 'on'
+    postgres_replication_master:
+      host: masterip
+      port: 5432
+      user: postgres
+    sysctl_settings:
+      kernel.shmmax: 104857600
+
