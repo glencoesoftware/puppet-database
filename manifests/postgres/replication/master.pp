@@ -15,5 +15,8 @@
 # Sample Usage:
 #
 class database::postgres::replication::master {
-  notice "master class replication"
+  file { 'recovery.conf':
+    ensure => 'absent',
+    path   => "/var/lib/pgsql/${version}/data/recovery.conf",
+  }
 }
