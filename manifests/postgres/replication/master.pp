@@ -16,8 +16,9 @@
 #
 class database::postgres::replication::master inherits database::postgres {
   file { 'recovery.conf':
-    ensure => 'absent',
-    path   => "/var/lib/pgsql/${version}/data/recovery.conf",
+    ensure  => 'absent',
+    path    => "/var/lib/pgsql/${version}/data/recovery.conf",
+    require => Exec['initdb'],
   }
 
   # must be defined
